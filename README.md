@@ -9,15 +9,15 @@ Sugerimos o uso das seguintes ferramentas acessíveis: [FullCalendar](https://fu
 
 ## Informações do trabalho
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome: Perciliana Rodrigues
+- Matricula: 904963
+- Proposta de projeto escolhida: Pessoas e Produções
+- Breve descrição sobre seu projeto: Esse projeto "Cantinho do Leitor" foi criado com objetivo de ter uma comunidade que conecta pessoas apaixonadas por leitura, e também, trazendo a história de cada autor e suas obras, e notícias de lançamentos em primeira mão.
 
 **Print da tela com a implementação**
 
-<< Coloque aqui uma breve explicação da implementação feita nessa etapa>>
+<< Foi usado o Chart.js para fazer um dashboard de gênero literário, apresentando atarvés de um gráfico de pizza os gêneros cadastros no site, e também, tem a opção de cadastrar novos livros, a medida que vai adicionando mais livros, mais vai atualizando o dashboard conforme o gênero cadastrado. >>
 
-<<  COLOQUE A IMAGEM TELA 1 AQUI >>
+<<  ![alt text](Dashboard.png) >>
 
-<<  COLOQUE A IMAGEM TELA 2 AQUI >>
+<< ![alt text](<Dashboard com novos livros.png>) >>
