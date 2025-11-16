@@ -1,127 +1,132 @@
-// ===========================================
-// 1. DADOS (JSON) - A lista de livros
-// ===========================================
-const livrosParaDestaque = [
-    {
-        id: 1,
-        titulo: "O Princípe Cruel",
-        autor: "Holly Black",
-        resenha: "Uma história de fantasia imperdível, cheia de intrigas e magia.",
-        descricaoCompleta: "Detalhes profundos sobre a narrativa, personagens e o mundo de fantasia criado pela autora.",
-        imagemURL: "/Imagens/O príncipe cruel capa.jpeg"
-    },
-    {
-        id: 2,
-        titulo: "A Hipótese do Amor",
-        autor: "Ali Hazelwood",
-        resenha: "Comédia romântica no mundo acadêmico que virou febre!",
-        descricaoCompleta: "Análise completa dos clichês e da dinâmica de 'enemies-to-lovers' deste best-seller.",
-        imagemURL: "/Imagens/A hipotese do amor.jpeg"
-    },
-    {
-        id: 3,
-        titulo: "É Assim que Acaba",
-        autor: "Colleen Hoover",
-        resenha: "Um drama emocionante que aborda temas difíceis com sensibilidade.",
-        descricaoCompleta: "Discussão sobre os temas sensíveis abordados, o impacto e a relevância do livro na literatura contemporânea.",
-        imagemURL: "/Imagens/É assim que acaba (Edição de colecionador).jpeg"
-    }
-];
+// URL do seu banco de dados
+const API_URL = 'http://localhost:3000/livros';
 
 // ===========================================
-// 2. LÓGICA DE RENDERIZAÇÃO
+// LÓGICA DE RENDERIZAÇÃO (Leitura de dados)
 // ===========================================
 
-// NOVA FUNÇÃO PARA MONTAR O CARROSSEL DINAMICAMENTE
-function renderizarCarrossel() {
+/**
+ * Busca os livros da API e preenche o carrossel
+ */
+async function renderizarCarrossel() {
     const indicatorsContainer = document.getElementById('carousel-indicators-container');
     const innerContainer = document.getElementById('carousel-inner-container');
-
+    
+    // Se não estiver na index.html, não faz nada
     if (!indicatorsContainer || !innerContainer) return;
 
-    let indicatorsHTML = '';
-    let innerHTML = '';
+    try {
+        // Busca os dados da API (db.json)
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Falha ao buscar livros');
+        const livros = await response.json();
 
-    livrosParaDestaque.forEach((livro, index) => {
-        const activeClass = index === 0 ? 'active' : ''; // Apenas o primeiro item é 'active'
+        let indicatorsHTML = '';
+        let innerHTML = '';
 
-        // Cria o HTML para os indicadores (as bolinhas)
-        indicatorsHTML += `
-            <button type="button" data-bs-target="#meuCarrossel" data-bs-slide-to="${index}" class="${activeClass}" aria-current="true" aria-label="Slide ${index + 1}"></button>
-        `;
-
-        // Cria o HTML para os slides (imagem + legenda)
-        innerHTML += `
-            <div class="carousel-item ${activeClass}">
-                <img src="${livro.imagemURL}" class="d-block w-100" alt="Capa do livro ${livro.titulo}">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>${livro.titulo}</h5>
-                    <p>${livro.resenha}</p>
+        livros.forEach((livro, index) => {
+            const activeClass = index === 0 ? 'active' : ''; 
+            indicatorsHTML += `
+                <button type="button" data-bs-target="#meuCarrossel" data-bs-slide-to="${index}" class="${activeClass}" aria-current="true" aria-label="Slide ${index + 1}"></button>
+            `;
+            innerHTML += `
+                <div class="carousel-item ${activeClass}">
+                    <img src="${livro.imagemURL}" class="d-block w-100" alt="Capa do livro ${livro.titulo}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>${livro.titulo}</h5>
+                        <p>${livro.resenha}</p>
+                    </div>
                 </div>
-            </div>
-        `;
-    });
-
-    // Insere o HTML gerado nos containers
-    indicatorsContainer.innerHTML = indicatorsHTML;
-    innerContainer.innerHTML = innerHTML;
+            `;
+        });
+        indicatorsContainer.innerHTML = indicatorsHTML;
+        innerContainer.innerHTML = innerHTML;
+    } catch (error) {
+        console.error("Erro ao renderizar carrossel:", error);
+        innerContainer.innerHTML = `<div class="alert alert-danger">Erro ao carregar livros. Você iniciou o json-server?</div>`;
+    }
 }
 
-
-function renderizarCardsNaInicial() {
+/**
+ * Busca os livros da API e preenche os cards
+ */
+async function renderizarCardsNaInicial() {
     const containerCards = document.getElementById('container-cards');
     if (!containerCards) return;
 
-    containerCards.innerHTML = ''; 
+    try {
+        containerCards.innerHTML = ''; // Limpa
+        
+        // Busca os dados da API (db.json)
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Falha ao buscar livros');
+        const livros = await response.json();
 
-    livrosParaDestaque.forEach(livro => {
-        const cardColuna = document.createElement('div');
-        cardColuna.className = 'col-lg-4 col-md-6 mb-4';
-
-        cardColuna.innerHTML = `
-            <div class="card h-100">
-                <a href="detalhes.html?id=${livro.id}">
-                    <img src="${livro.imagemURL}" class="card-img-top" alt="Capa do livro ${livro.titulo}">
-                </a>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${livro.titulo}</h5>
-                    <p class="card-text text-muted">Autor(a): ${livro.autor}</p>
-                    <p class="card-text mt-2 flex-grow-1">${livro.resenha}</p>
-                    <a href="detalhes.html?id=${livro.id}" class="btn btn-primary align-self-start mt-auto">Ver Mais Detalhes</a>
+        livros.forEach(livro => {
+            const cardColuna = document.createElement('div');
+            cardColuna.className = 'col-lg-4 col-md-6 mb-4';
+            cardColuna.innerHTML = `
+                <div class="card h-100">
+                    <a href="detalhes.html?id=${livro.id}">
+                        <img src="${livro.imagemURL}" class="card-img-top" alt="Capa do livro ${livro.titulo}">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${livro.titulo}</h5>
+                        <p class="card-text text-muted">Autor(a): ${livro.autor}</p>
+                        <p class="card-text mt-2 flex-grow-1">${livro.resenha}</p>
+                        <a href="detalhes.html?id=${livro.id}" class="btn btn-primary align-self-start mt-auto">Ver Mais Detalhes</a>
+                    </div>
                 </div>
-            </div>
-        `;
-        containerCards.appendChild(cardColuna);
-    });
-}
-
-function renderizarDetalhesDoLivro() {
-    const detalhesContainer = document.getElementById('detalhes-livro');
-    if (!detalhesContainer) return;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const livroId = parseInt(urlParams.get('id'));
-    const livro = livrosParaDestaque.find(item => item.id === livroId);
-
-    if (livro) {
-        detalhesContainer.innerHTML = `
-            <img src="${livro.imagemURL}" alt="Capa do livro ${livro.titulo}" style="width: 300px; display: block; margin: 20px auto;">
-            <h1>${livro.titulo}</h1>
-            <h2>Por: ${livro.autor}</h2>
-            <p><strong>Resumo:</strong> ${livro.resenha}</p>
-            <p><strong>Detalhes Completos:</strong> ${livro.descricaoCompleta}</p>
-            <a href="index.html">← Voltar para a página inicial</a>
-        `;
-    } else {
-        detalhesContainer.innerHTML = '<h1>Livro não encontrado.</h1>';
+            `;
+            containerCards.appendChild(cardColuna);
+        });
+    } catch (error) {
+        console.error("Erro ao renderizar cards:", error);
+        containerCards.innerHTML = `<div class="alert alert-danger">Erro ao carregar livros. Você iniciou o json-server?</div>`;
     }
 }
 
-// ===========================================
-// INICIAÇÃO GERAL
-// ===========================================
+/**
+ * Busca um livro específico da API (para a página de detalhes)
+ */
+async function renderizarDetalhesDoLivro() {
+    const detalhesContainer = document.getElementById('detalhes-livro');
+    if (!detalhesContainer) return; // Só roda na página de detalhes
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const livroId = urlParams.get('id'); // ID agora é string
+    
+    if (!livroId) return;
+
+    try {
+        // Busca um livro específico pelo ID
+        const response = await fetch(`${API_URL}/${livroId}`);
+        if (!response.ok) throw new Error('Livro não encontrado');
+        const livro = await response.json();
+
+        if (livro) {
+            detalhesContainer.innerHTML = `
+                <img src="${livro.imagemURL}" alt="Capa do livro ${livro.titulo}" style="width: 300px; display: block; margin: 20px auto;">
+                <h1>${livro.titulo}</h1>
+                <h2>Por: ${livro.autor}</h2>
+                <p><strong>Resumo:</strong> ${livro.resenha}</p>
+                <p><strong>Detalhes Completos:</strong> ${livro.descricaoCompleta}</p>
+                <a href="index.html">← Voltar para a página inicial</a>
+            `;
+        } else {
+            detalhesContainer.innerHTML = '<h1>Livro não encontrado.</h1>';
+        }
+    } catch (error) {
+        console.error("Erro ao buscar detalhes:", error);
+        detalhesContainer.innerHTML = `<h1>Livro não encontrado.</h1> <p>Verifique o ID e se o json-server está rodando.</p>`;
+    }
+}
+
+// CHAMA AS FUNÇÕES QUANDO A PÁGINA CARREGA
 document.addEventListener('DOMContentLoaded', () => {
-    renderizarCarrossel(); // Chama a nova função do carrossel
+    // Tenta rodar todas. Elas só vão funcionar se acharem os IDs
+    // corretos em cada página (index.html ou detalhes.html)
+    renderizarCarrossel();
     renderizarCardsNaInicial();
     renderizarDetalhesDoLivro();
 });

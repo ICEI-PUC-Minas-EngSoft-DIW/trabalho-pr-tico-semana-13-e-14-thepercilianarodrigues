@@ -60,9 +60,11 @@
       "id": "1",
       "titulo": "O Princípe Cruel",
       "autor": "Holly Black",
-      "resenha": "Uma história de fantasia imperdível, cheia de intrigas e magia.",
+      "resenha": "Uma história de fantasia imperdível...",
       "descricaoCompleta": "Detalhes profundos sobre a narrativa...",
-      "imagemURL": "/Imagens/O príncipe cruel capa.jpeg"
+      "imagemURL": "/Imagens/O príncipe cruel capa.jpeg",
+      "vendas": 150,
+      "genero": "Fantasia"
     },
     {
       "id": "2",
@@ -70,7 +72,9 @@
       "autor": "Ali Hazelwood",
       "resenha": "Comédia romântica no mundo acadêmico que virou febre!",
       "descricaoCompleta": "Análise completa dos clichês...",
-      "imagemURL": "/Imagens/A hipotese do amor.jpeg"
+      "imagemURL": "/Imagens/A hipotese do amor.jpeg",
+      "vendas": 320,
+      "genero": "Romance"
     },
     {
       "id": "3",
@@ -78,7 +82,36 @@
       "autor": "Colleen Hoover",
       "resenha": "Um drama emocionante que aborda temas difíceis com sensibilidade.",
       "descricaoCompleta": "Discussão sobre os temas sensíveis...",
-      "imagemURL": "/Imagens/É assim que acaba (Edição de colecionador).jpeg"
+      "imagemURL": "/Imagens/É assim que acaba (Edição de colecionador).jpeg",
+      "vendas": 210,
+      "genero": "Drama"
+    },
+    {
+      "id": "36be",
+      "titulo": "Maxton Hall",
+      "autor": "Mona Kasten",
+      "genero": "Romance",
+      "resenha": "Em Maxton Hall: Um Mundo Entre Nós, uma bolsista de uma escola de elite descobre um segredo de um dos alunos mais poderosos da instituição, que fará de tudo para tentar silenciá-la, mas a relação dos dois se intensifica e vira paixão. Baseada no livro \"Save Me\", da autora Mona Kasten, a série alemão conta a história de Ruby Bell (Harriet Herbig-Matten), que é bolsista na renomada escola Maxton Hall. Ela acidentalmente se depara com uma cena escandalosa envolvendo James Beaufort (Damian Hardung), uma dos garotos mais ricos e populares do colégio. O herdeiro tenta comprar seu silêncio e propor acordos para guardar o segredo, mas a negociação entre os dois acaba despertando sentimentos intensos.",
+      "imagemURL": "",
+      "vendas": 0
+    },
+    {
+      "id": "9822",
+      "titulo": "As Crônicas de Nárnia",
+      "autor": "C.S Lewis",
+      "genero": "Fantasia",
+      "resenha": "As resenhas de \"As Crônicas de Nárnia\" destacam a série como uma saga fantástica com forte apelo moral, espiritual e político, adequada para todas as idades. As histórias são elogiadas pela magia envolvente, personagens cativantes e cenários vívidos que transportam o leitor, como descrito em resenhas de obras como \"O Leão, a Feiticeira e o Guarda-roupa\" e \"Príncipe Caspian\". A série é rica em temas como perdão, sacrifício, fé e a dualidade entre o bem e o mal. ",
+      "imagemURL": "",
+      "vendas": 0
+    },
+    {
+      "id": "419a",
+      "titulo": "A Empregada",
+      "autor": "Freida McFadden",
+      "genero": "Suspense",
+      "resenha": "A história segue Millie, uma ex-presidiária que aceita um trabalho como empregada para um casal rico, os Winchester, e descobre que segredos sombrios se escondem por trás da fachada da família. ",
+      "imagemURL": "",
+      "vendas": 0
     }
   ]
 }
